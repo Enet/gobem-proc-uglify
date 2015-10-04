@@ -1,0 +1,34 @@
+{
+    "name": "gobem-proc-uglify",
+    "version": "0.0.1",
+    "description": "Processor to minify javascript files for gobem builder.",
+    "main": "index.js",
+    "dependencies": {
+        "uglify-js": "*",
+        "redis": "*"
+    },
+    "peerDependencies": {
+        "gobem": "*"
+    },
+    "keywords": [
+        "gobem",
+        "processor",
+        "minifier",
+        "uglify",
+        "javascript",
+        "js"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": {
+        "name": "Stepan Zhevak",
+        "email": "enet@protonmail.ch",
+        "url": "zhevak.name"
+    },
+    "repository": "https://github.com/Enet/gobem-proc-uglify",
+    "license": "GPLv3",
+    "engines": {
+        "node": ">=4.0.0"
+    }
+}

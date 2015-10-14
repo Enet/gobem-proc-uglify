@@ -1,6 +1,6 @@
 {
     "name": "gobem-proc-uglify",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Processor to minify javascript files for gobem builder.",
     "main": "index.js",
     "dependencies": {

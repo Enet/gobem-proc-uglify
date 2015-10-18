@@ -1,11 +1,23 @@
 # gobem-proc-uglify
-This processor for [gobem](https://github.com/Enet/gobem) minifies javascript files using **uglify-js**. If an argument `ignore-errors` is passed and error occured, raw javascript will be written instead minified one. Empty files are just skipped.
+This processor for [gobem](https://github.com/Enet/gobem) minifies javascript files using **uglify-js**. All options are passed as a single object. Empty files are just skipped during processing. **gobem-proc-uglify** requires redis database to cache results of the work.
 
-**gobem-proc-uglify** requires redis database to cache results.
+The following options are supported:
+* `ignoreErrors`<br>
+If this flag is `true` and error occured, raw file's content will be written instead minified one.
+* `redisKey`<br>
+The key in the redis database to store cache. Default value is `gobem-proc-uglify`.
+* `redisClient`<br>
+Already created redis-client. [This](https://github.com/NodeRedis/node_redis) module is used.
+* `redisOptions`<br>
+Options for a new redis-client. This field is ignored, if `redisClient` is passed.
 
-### Example for **build.gb**
+### Example for **build.js**
 ```javascript
-select 0 ^components\/(\w+)\/\1\.js$
-process gobem-proc-uglify ignore-errors
-write 1
+module.exports = function () {
+    return [
+        ['select', 0, /^components\/(\w+)\/\1\.es2015.js$/],
+        ['gobem-proc-uglify', {ignoreErrors: true}],
+        ['write', 1]
+    ]; // this array will be used as build instructions
+};
 ```

@@ -3,18 +3,20 @@
 var uglify = require('uglify-js'),
     redis = require('redis');
 
-module.exports = function () {
-    let client,
-        key = 'gobem-proc-uglify';
+module.exports = function (options) {
+    options = options || {};
+
+    let client = options.redisClient,
+        key = options.redisKey || 'gobem-proc-uglify';
 
     return {
         before: function (next) {
-            client = redis.createClient();
+            client = client || redis.createClient();
             client.expire(key, 86400);
             next();
         },
 
-        process: function (next, input, output, args, content, path) {
+        process: function (next, input, output, config, content, path) {
             if (!content) return next();
 
             client.hget(key, content, function (error, reply) {
@@ -24,7 +26,7 @@ module.exports = function () {
                         client.hset(key, content, output.get(path), next);
                     } catch (error) {
                         output.set(path, content);
-                        next(~args.indexOf('ignore-errors') ? null : error);
+                        next(options.ignoreErrors ? null : error);
                     }
                 } else {
                     output.set(path, reply);
@@ -34,7 +36,7 @@ module.exports = function () {
         },
 
         clear: function (next) {
-            client.end();
+            options.redisClient && client.end();
             next();
         }
     };

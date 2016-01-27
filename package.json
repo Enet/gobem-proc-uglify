@@ -1,11 +1,11 @@
 {
     "name": "gobem-proc-uglify",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Processor to minify javascript files for gobem builder.",
     "main": "index.js",
     "dependencies": {
         "uglify-js": "*",
-        "redis": "*"
+        "xxhash": "*"
     },
     "peerDependencies": {
         "gobem": "*"

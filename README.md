@@ -1,4 +1,7 @@
 # gobem-proc-uglify
+**DON'T USE THE PACKAGE. IT'S DEPRECATED!!!
+USE [webpack](https://github.com/webpack) INSTEAD.**
+
 This processor for [gobem](https://github.com/Enet/gobem) minifies javascript files using **uglify-js**. All options are passed as a single object. Empty files are just skipped during processing. **gobem-proc-uglify** requires directory to cache results of the work.
 
 The following options are supported:
